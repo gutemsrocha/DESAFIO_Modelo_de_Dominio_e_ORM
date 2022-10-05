@@ -2,6 +2,11 @@ package com.devsuperior.desafio.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -18,14 +23,24 @@ public class Atividade {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "atividade")
+    private List<Bloco> blocos = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "tb_atividade_participante",
+            joinColumns = @JoinColumn(name = "atividade_id"),
+            inverseJoinColumns = @JoinColumn(name = "participante_id"))
+    private Set<Participante> participantes = new HashSet<>();
+
     public Atividade(){
     }
 
-    public Atividade(Integer id, String name, String descricao, Double preco) {
+    public Atividade(Integer id, String name, String descricao, Double preco, Categoria categoria) {
         this.id = id;
         this.name = name;
         this.descricao = descricao;
         this.preco = preco;
+        this.categoria = categoria;
     }
 
     public Integer getId() {
@@ -58,5 +73,21 @@ public class Atividade {
 
     public void setPreco(Double preco) {
         this.preco = preco;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public List<Bloco> getBlocos() {
+        return blocos;
+    }
+
+    public Set<Participante> getParticipantes() {
+        return participantes;
     }
 }
