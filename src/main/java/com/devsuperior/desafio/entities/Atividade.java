@@ -14,7 +14,7 @@ public class Atividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nome;
     @Column(columnDefinition = "TEXT")
     private String descricao;
     private Double preco;
@@ -35,9 +35,9 @@ public class Atividade {
     public Atividade(){
     }
 
-    public Atividade(Integer id, String name, String descricao, Double preco, Categoria categoria) {
+    public Atividade(Integer id, String nome, String descricao, Double preco, Categoria categoria) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.categoria = categoria;
@@ -51,12 +51,12 @@ public class Atividade {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getnome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setnome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
